@@ -25,6 +25,10 @@ defmodule Sips.Router do
     resources "user", UserController, only: [:show, :index] do
       get "goals", GoalController, :index, as: :goals
     end
-    resources "/goals", GoalController, except: [:new, :edit]
+    resources "/goals", GoalController, except: [:new, :edit] do
+      get "measures", MeasureController, :index, as: :measures
+      post "measures", MeasureController, :create, as: :measures
+    end
+    resources "/measures", MeasureController, except: [:new, :edit, :create]
   end
 end
