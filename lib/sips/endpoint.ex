@@ -33,5 +33,7 @@ defmodule Sips.Endpoint do
     key: "_sips_key",
     signing_salt: "IW9+wTM3"
 
+  plug CORSPlug
+
   plug Sips.Router
 end
