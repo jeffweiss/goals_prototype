@@ -50,7 +50,13 @@ defmodule Sips.MeasureControllerTest do
     end
   end
 
-  test "creates and renders resource when data is valid", %{conn: conn, goal: goal} do
+  test "creates and renders resource through measure namespace when data is valid", %{conn: conn, goal: goal} do
+    conn = post conn, measure_path(conn, :create), data: %{type: "measures", attributes: Map.put(@valid_attrs, :goal_id, goal.id), relationships: %{}}
+    assert json_response(conn, 201)["data"]["id"]
+    assert Repo.get_by(Measure, @valid_attrs)
+  end
+
+  test "creates and renders resource through goal namespace when data is valid", %{conn: conn, goal: goal} do
     conn = post conn, goal_measures_path(conn, :create, goal), data: %{type: "measures", attributes: @valid_attrs, relationships: %{}}
     assert json_response(conn, 201)["data"]["id"]
     assert Repo.get_by(Measure, @valid_attrs)

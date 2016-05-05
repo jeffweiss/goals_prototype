@@ -39,6 +39,21 @@ defmodule Sips.MeasureController do
         |> render(Sips.ChangesetView, "error.json", changeset: changeset)
     end
   end
+  def create(conn, %{"data" => %{"type" => "measures", "attributes" => measure_params, "relationships" => _}}) do
+    changeset = Measure.changeset(%Measure{}, measure_params)
+
+    case Repo.insert(changeset) do
+      {:ok, measure} ->
+        conn
+        |> put_status(:created)
+        |> put_resp_header("location", measure_path(conn, :show, measure))
+        |> render("show.json", data: measure)
+      {:error, changeset} ->
+        conn
+        |> put_status(:unprocessable_entity)
+        |> render(Sips.ChangesetView, "error.json", changeset: changeset)
+    end
+  end
 
   def show(conn, %{"id" => id}) do
     measure = Repo.get!(Measure, id)

@@ -3,7 +3,7 @@ defmodule Sips.MeasureTest do
 
   alias Sips.Measure
 
-  @valid_attrs %{name: "some content", value: "some content"}
+  @valid_attrs %{name: "some content", value: "some content", goal_id: 1}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do

@@ -9,7 +9,7 @@ defmodule Sips.Measure do
     timestamps
   end
 
-  @required_fields ~w(name value)
+  @required_fields ~w(name value goal_id)
   @optional_fields ~w()
 
   @doc """

@@ -29,7 +29,7 @@ defmodule Sips.Router do
       get "measures", MeasureController, :index, as: :measures
       post "measures", MeasureController, :create, as: :measures
     end
-    resources "/measures", MeasureController, except: [:new, :edit, :create]
+    resources "/measures", MeasureController, except: [:new, :edit]
     resources "/lists", ListController, except: [:new, :edit]
   end
 end
